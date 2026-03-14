@@ -1,43 +1,38 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Create Memo</title>
-    <style>
-      /* 폰트 크기 고정 (px 사용 시 브라우저/줌에 따라 상대적으로 덜 변함) */
-      html {
-        font-size: 16px;
-      }
-      body {
-        font-size: 16px;
-      }
-      label, input, textarea, button, a {
-        font-size: 16px;
-      }
-      h2 { font-size: 20px; }
-      h3 { font-size: 18px; }
-      p { font-size: 16px; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Memo App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
-    <form action="/" method="post">
-      <label for="title">Title</label>
-      <input type="text" id="title" name="title" />
+    <div class="container">
+      <section class="form-card">
+        <form action="/" method="post">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" placeholder="Memo title" />
 
-      <label for="content">Content</label>
-      <textarea id="content" name="content"></textarea>
+          <label for="content">Content</label>
+          <textarea id="content" name="content" placeholder="Write your memo..."></textarea>
 
-      <button type="submit">Submit</button>
-    </form>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </section>
 
-    <h2>Memos</h2>
-    {% for memo in memos %}
-    <div>
-      <h3>{{ memo.title }}</h3>
-      <p>{{ memo.content }}</p>
-      <a href="{{ url_for('edit', id=memo.id) }}">Edit</a>
-      <a href="{{ url_for('delete', id=memo.id) }}">Delete</a>
+      <h2 class="section-title">Memos</h2>
+      <div class="memo-list">
+        {% for memo in memos %}
+        <article class="memo-card">
+          <h3>{{ memo.title }}</h3>
+          <p class="memo-content">{{ memo.content }}</p>
+          <div class="memo-actions">
+            <a href="{{ url_for('edit', id=memo.id) }}" class="btn btn-edit">Edit</a>
+            <a href="{{ url_for('delete', id=memo.id) }}" class="btn btn-delete">Delete</a>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
     </div>
-    {% endfor %}
   </body>
 </html>
