@@ -11,6 +11,7 @@ class Memo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     content = db.Column(db.Text, nullable=False)
+
     
 
 
@@ -30,12 +31,24 @@ def index():
     return render_template("index.html", memos=memos) 
 
 
+@app.route("/edit/<int:id>", methods=["GET", "POST"])
+def edit(id):
+    memo = Memo.query.get_or_404(id)
+    if request.method == "POST":
+        memo.title = request.form.get("title", "")
+        memo.content = request.form.get("content", "")
+        db.session.commit()
+        return redirect(url_for("index"))
+    return render_template("edit.html", memo=memo)
+
+
 @app.route("/delete/<int:id>")
 def delete(id):
     memo = Memo.query.get_or_404(id)
     db.session.delete(memo)
     db.session.commit()
-    return redirect(url_for("index()"))
+    return redirect(url_for("index"))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
