@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Create Memo</title>
+    <style>
+      /* 폰트 크기 고정 (px 사용 시 브라우저/줌에 따라 상대적으로 덜 변함) */
+      html {
+        font-size: 16px;
+      }
+      body {
+        font-size: 16px;
+      }
+      label, input, textarea, button, a {
+        font-size: 16px;
+      }
+      h2 { font-size: 20px; }
+      h3 { font-size: 18px; }
+      p { font-size: 16px; }
+    </style>
+  </head>
+  <body>
+    <form action="/" method="post">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" />
+
+      <label for="content">Content</label>
+      <textarea id="content" name="content"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <h2>Memos</h2>
+    {% for memo in memos %}
+    <div>
+      <h3>{{ memo.title }}</h3>
+      <p>{{ memo.content }}</p>
+      <a href="{{ url_for('delete', id=memo.id) }}">Delete</a>
+    </div>
+    {% endfor %}
+  </body>
+</html>
