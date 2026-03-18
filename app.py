@@ -1,17 +1,21 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_moment import Moment 
+from datetime import datetime
+
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///memos.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
+moment = Moment(app)
 
 
 class Memo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     content = db.Column(db.Text, nullable=False)
-
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
 
 
@@ -24,7 +28,7 @@ def index():
     if request.method == "POST":
         title = request.form.get("title", "")
         content = request.form.get("content", "")
-        memo = Memo(title=title, content=content)
+        memo = Memo(title=title, content=content, created_at=datetime.utcnow(),)
         db.session.add(memo)
         db.session.commit()
     memos = Memo.query.order_by(Memo.id).all()
