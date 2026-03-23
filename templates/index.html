@@ -28,9 +28,9 @@
           <p class="memo-content">{{ memo.content }}</p>
           <p class="memo-time">
             {% if memo.updated_at and memo.updated_at != memo.created_at %}
-              <span class="memo-updated-at">마지막 수정: {{ memo.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+              <span class="memo-updated-at" data-time="{{ memo.updated_at.isoformat() }}">마지막 수정: {{ memo.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}</span>
             {% else %}
-              <span class="memo-created-at">작성: {{ memo.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+              <span class="memo-created-at" data-time="{{ memo.created_at.isoformat() }}">작성: {{ memo.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</span>
             {% endif %}
           </p>
           <div class="memo-actions">
@@ -42,4 +42,5 @@
       </div>
     </div>
   </body>
+  <script src="{{ url_for('static', filename='time.js') }}"></script>
 </html>
