@@ -14,7 +14,18 @@ function formatTime(past) {
 const elements = document.querySelectorAll('.memo-created-at, .memo-updated-at');
 elements.forEach(element=>{
     const past = new Date(element.dataset.time);
-    const text = formatTime(past);
-    element.textContent = text;
+    const textContent = formatTime(past);
+
+    let prefix; 
+    
+    if (element.classList.contains('memo-created-at')) {
+        prefix = '작성'
+    } else {
+        prefix = '마지막 수정'
+    }
+
+    element.textContent = `${prefix}: ${textContent}`;
+
 });
+
 

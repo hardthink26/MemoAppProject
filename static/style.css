@@ -4,7 +4,7 @@
 }
 
 body {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: #1a1a1a;
@@ -21,7 +21,7 @@ body {
 /* Form card – centered input area */
 .form-card {
   background: #fff;
-  border-radius: 8px;
+  border-radius:20px; 
   padding: 1.5rem;
   margin-bottom: 2rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -63,19 +63,19 @@ body {
   font-size: 15px;
   font-weight: 500;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
   font-family: inherit;
 }
 
 .btn-primary {
-  background: #1a1a1a;
-  color: #fff;
+  background: #ff6b9d;
+  color: white;
 }
 
 .btn-primary:hover {
-  background: #333;
+  background: #ff4f8a;
 }
 
 .btn-edit {
@@ -114,7 +114,7 @@ body {
   font-size: 1.125rem;
   font-weight: 600;
   margin: 0 0 1rem;
-  color: #333;
+  color: #ff6b9d;
 }
 
 /* Memo cards */
@@ -126,7 +126,7 @@ body {
 
 .memo-card {
   background: #fff;
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 1.25rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   border: 1px solid #eee;
