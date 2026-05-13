@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <form method="post" action="{{ url_for('auth.login') }}"> 
+        <fieldset> 
+            <legend>Login</legend>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+            </div>
+            <div>
+                <button type="submit">Login</button>
+                <button type="reset">Reset</button>
+            </div>
+        </fieldset>
+    </form> 
+</html>

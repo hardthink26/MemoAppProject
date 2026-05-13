@@ -1,3 +1,6 @@
+import os
+import secrets
+
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_moment import Moment
@@ -5,22 +8,36 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from flask_bootstrap import Bootstrap
 from werkzeug.security import generate_password_hash, check_password_hash
+from config import config
+
+db = SQLAlchemy()
+moment = Moment()
+bootstrap = Bootstrap()
 
 
 def local_now():
     """한국 표준시(Asia/Seoul) 기준 현재 시각. SQLite 호환을 위해 tz 없이 저장."""
     return datetime.now(ZoneInfo("Asia/Seoul")).replace(tzinfo=None)
 
+def create_app(config_name="default"):
+    app = Flask(__name__)
+    app.config.from_object(config[config_name])
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///memos.db"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") or secrets.token_hex(32)
+    db.init_app(app)
+    moment.init_app(app)
+    bootstrap.init_app(app)
 
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///memos.db"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-db = SQLAlchemy(app)
-moment = Moment(app)
+    from auth import auth_bp
+    app.register_blueprint(auth_bp)
 
-from auth import auth_bp
+    return app
 
-app.register_blueprint(auth_bp)
+
+
+# Create app instance before models
+app = create_app()
 
 
 class Role(db.Model):
