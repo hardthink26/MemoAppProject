@@ -165,3 +165,20 @@ body {
   margin: 0 0 1rem;
   color: #1a1a1a;
 }
+
+/* login form  - centered input area */
+.login-form {
+  background: #fff;
+  border-radius: 28px;
+  padding: 3rem;
+  box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  width: min(100% - 2rem, 52rem);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+

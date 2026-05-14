@@ -1,11 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "bootstrap/base.html" %}
+{% block title %}Login{% endblock %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+{% endblock %}
+{% block content %}
+<div class="login-form">
     <form method="post" action="{{ url_for('auth.login') }}"> 
         <fieldset> 
             <legend>Login</legend>
-            <div class="form-group">
+            <div class="user-name-form">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Enter your username">
+            </div>
+            <div class="password-form">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password">
             </div>
@@ -15,4 +23,5 @@
             </div>
         </fieldset>
     </form> 
-</html>
+</div>
+{% endblock %}

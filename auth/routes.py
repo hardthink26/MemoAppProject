@@ -1,5 +1,4 @@
 from flask import render_template
-
 from auth import auth_bp
 from auth.forms import LoginForm
 
