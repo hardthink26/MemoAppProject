@@ -1,10 +1,10 @@
-# Virtual environment
+# --- 가상환경(venv 안에는 pip 설치물만; 이 파일들은 루트에 둠) ---
 venv/
 .venv/
 env/
 .env/
 
-# Python bytecode and caches
+# --- Python 빌드·캐시 ---
 __pycache__/
 *.py[cod]
 *$py.class
@@ -15,25 +15,26 @@ __pycache__/
 dist/
 build/
 
-# Flask
-instance/
+# --- Flask ---
+instance/*
+!instance/.gitignore
 .webassets-cache
 *.db
 *.sqlite
 *.sqlite3
 
-# Environment and secrets
+# --- 환경 변수·비밀(venv 밖, 루트; .flaskenv는 앱 진입점만 두는 경우가 많음) ---
 .env
 .env.local
 *.pem
 
-# IDE and OS
+# --- IDE·OS ---
 .idea/
 .vscode/
 .DS_Store
 Thumbs.db
 
-# Testing and coverage
+# --- 테스트·커버리지 ---
 .pytest_cache/
 .coverage
 htmlcov/

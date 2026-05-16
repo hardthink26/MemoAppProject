@@ -1,7 +1,7 @@
 import os
 import secrets
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_moment import Moment
 from datetime import datetime
@@ -38,7 +38,6 @@ def create_app(config_name="default"):
 
 # Create app instance before models
 app = create_app()
-
 
 class Role(db.Model):
     __tablename__ = "roles"
@@ -86,8 +85,11 @@ with app.app_context():
     db.create_all()
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/memos", methods=["GET", "POST"])
 def index():
+    if "username" not in session:
+        return redirect(url_for("auth.login"))
+
     if request.method == "POST":
         title = request.form.get("title", "")
         content = request.form.get("content", "")

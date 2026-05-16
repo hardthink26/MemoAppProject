@@ -1,3 +1,4 @@
+# venv와 별도로 루트에 둡니다. 가상환경 활성화 후: pip install -r requirements.txt
 Flask
 Flask-Bootstrap
 Flask-Moment

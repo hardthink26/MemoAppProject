@@ -1,9 +1,16 @@
-from flask import render_template
+from flask import render_template , request, redirect, url_for, session
 from auth import auth_bp
-from auth.forms import LoginForm
 
-
-@auth_bp.route("/login", methods=["GET", "POST"])
+@auth_bp.route("/", methods=["GET", "POST"])
 def login():
-    form = LoginForm()
-    return render_template("auth/login.html", form=form)
+    username = None 
+    password = None 
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        session["username"] = username
+        return redirect(url_for("index"))
+
+    return render_template("auth/login.html")
+
+
